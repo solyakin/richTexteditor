@@ -1,16 +1,16 @@
 import React from 'react'
 import { Editor  } from "react-draft-wysiwyg";
 import { EditorState } from "draft-js";
+import { embedVimeoVideo, embedYoutubeVideo } from '../../utils/embedConverter';
 
 const EditorComponent = ({ editorState, handleChange}) => {
 
     const embedVideoCallBack = (link : string) =>{
         if (link.indexOf("youtube") >= 0){
-            link = link.replace("watch?v=","embed/");
-            link = link.replace("/watch/", "/embed/");
-            link = link.replace("youtu.be/","youtube.com/embed/");
+            return embedYoutubeVideo(link)
+        }else if(link.indexOf("vimeo") >= 0){
+          return embedVimeoVideo(link)
         }
-        return link
     }
 
   return (
